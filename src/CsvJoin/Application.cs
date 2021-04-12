@@ -25,10 +25,8 @@ namespace CsvJoin
             string directory = args.First();
             string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-            using var reader1 = new StreamReader(
-                @$"{directory}\{fileNames[0]}");
-            using var reader2 = new StreamReader(
-                @$"{directory}\{fileNames[1]}");
+            using var reader1 = new StreamReader(@$"{directory}\{fileNames[0]}");
+            using var reader2 = new StreamReader(@$"{directory}\{fileNames[1]}");
 
             var csv1s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv1>>(
                 reader1);
