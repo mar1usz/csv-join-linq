@@ -1,10 +1,10 @@
 ﻿namespace CsvJoin.Models
 {
-    public class NewSale
+    public class Csv1
     {
         public string Customer { get; set; }
         public string Product { get; set; }
-        public int Quantity { get; set; }
-        public int Cost { get; set; }
+        public string Price { get; set; }
+        public string Quantity { get; set; }
     }
 }

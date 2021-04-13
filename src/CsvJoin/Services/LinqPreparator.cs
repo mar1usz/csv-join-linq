@@ -9,22 +9,22 @@ namespace CsvJoin.Services
     public class LinqPreparator : ILinqPreparator
     {
         public IEnumerable<dynamic> PrepareLeftJoinLinq(
-            IEnumerable<Sale> sales,
-            IEnumerable<NewSale> newSales)
+            IEnumerable<Csv1> csv1s,
+            IEnumerable<Csv2> csv2s)
         {
-            return from sale in sales
-                   join newSale in newSales on new { sale.Customer, sale.Product, sale.Quantity } equals new { newSale.Customer, newSale.Product, newSale.Quantity } into gj
-                   from newSale in gj.DefaultIfEmpty()
-                   select new { sale.Customer, sale.Product, sale.Price, sale.Quantity, Cost = newSale?.Cost ?? null };
+            return from csv1 in csv1s
+                   join csv2 in csv2s on new { csv1.Customer, csv1.Product, csv1.Quantity } equals new { csv2.Customer, csv2.Product, csv2.Quantity } into gj
+                   from csv2 in gj.DefaultIfEmpty()
+                   select new { csv1.Customer, csv1.Product, csv1.Price, csv1.Quantity, Cost = csv2?.Cost ?? string.Empty };
         }
 
         public IEnumerable<dynamic> PrepareJoinLinq(
-            IEnumerable<Sale> sales,
-            IEnumerable<NewSale> newSales)
+            IEnumerable<Csv1> csv1s,
+            IEnumerable<Csv2> csv2s)
         {
-            return from sale in sales
-                   join newSale in newSales on new { sale.Customer, sale.Product, sale.Quantity } equals new { newSale.Customer, newSale.Product, newSale.Quantity }
-                   select new { sale.Customer, sale.Product, sale.Price, sale.Quantity, newSale.Cost };
+            return from csv1 in csv1s
+                   join csv2 in csv2s on new { csv1.Customer, csv1.Product, csv1.Quantity } equals new { csv2.Customer, csv2.Product, csv2.Quantity }
+                   select new { csv1.Customer, csv1.Product, csv1.Price, csv1.Quantity, csv2.Cost };
         }
     }
 }
