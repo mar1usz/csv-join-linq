@@ -15,9 +15,29 @@ namespace CsvJoin.Services
             IEnumerable<Csv2> csv2s)
         {
             return from csv1 in csv1s
-                   join csv2 in csv2s on new { csv1.Customer, csv1.Product, csv1.Quantity } equals new { csv2.Customer, csv2.Product, csv2.Quantity } into gj
+                   join csv2 in csv2s
+                   on new
+                   {
+                       csv1.Customer,
+                       csv1.Product,
+                       csv1.Quantity
+                   }
+                   equals new
+                   {
+                       csv2.Customer,
+                       csv2.Product,
+                       csv2.Quantity
+                   }
+                   into gj
                    from csv2 in gj.DefaultIfEmpty()
-                   select new { csv1.Customer, csv1.Product, csv1.Price, csv1.Quantity, Cost = csv2?.Cost ?? string.Empty };
+                   select new
+                   {
+                       csv1.Customer,
+                       csv1.Product,
+                       csv1.Price,
+                       csv1.Quantity,
+                       csv2?.Cost
+                   };
         }
 
         public IEnumerable<dynamic> PrepareJoinLinq(
@@ -25,8 +45,27 @@ namespace CsvJoin.Services
             IEnumerable<Csv2> csv2s)
         {
             return from csv1 in csv1s
-                   join csv2 in csv2s on new { csv1.Customer, csv1.Product, csv1.Quantity } equals new { csv2.Customer, csv2.Product, csv2.Quantity }
-                   select new { csv1.Customer, csv1.Product, csv1.Price, csv1.Quantity, csv2.Cost };
+                   join csv2 in csv2s
+                   on new
+                   {
+                       csv1.Customer,
+                       csv1.Product,
+                       csv1.Quantity
+                   }
+                   equals new
+                   {
+                       csv2.Customer,
+                       csv2.Product,
+                       csv2.Quantity
+                   }
+                   select new
+                   {
+                       csv1.Customer,
+                       csv1.Product,
+                       csv1.Price,
+                       csv1.Quantity,
+                       csv2.Cost
+                   };
         }
     }
 }
