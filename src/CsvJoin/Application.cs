@@ -28,12 +28,10 @@ namespace CsvJoin
             using var reader1 = new StreamReader(@$"{directory}\{fileNames[0]}");
             using var reader2 = new StreamReader(@$"{directory}\{fileNames[1]}");
 
-            var csv1s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv1>>(
-                reader1);
-            var csv2s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv2>>(
-                reader2);
+            var sales = CsvSerializer.DeserializeFromReader<IEnumerable<Sale>>(reader1);
+            var newSales = CsvSerializer.DeserializeFromReader<IEnumerable<NewSale>>(reader2);
 
-            var linq = _preparator.PrepareLeftJoinLinq(csv1s, csv2s);
+            var linq = _preparator.PrepareLeftJoinLinq(sales, newSales);
 
             var output = Console.OpenStandardOutput();
 
