@@ -7,16 +7,15 @@ namespace CsvJoin
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var services = new ServiceCollection();
-            
+
             ConfigureServices(services);
-            
+
             var serviceProvider = services.BuildServiceProvider();
-            
-            serviceProvider.GetRequiredService<Application>()
-                .Run(args);
+
+            serviceProvider.GetRequiredService<Application>().Run(args);
         }
 
         private static void ConfigureServices(IServiceCollection services)
