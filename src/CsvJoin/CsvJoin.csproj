@@ -29,6 +29,9 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Csv2.cs</LastGenOutput>
     </None>
+    <None Update="Properties\launchSettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Services\LinqPreparator.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LinqPreparator.cs</LastGenOutput>

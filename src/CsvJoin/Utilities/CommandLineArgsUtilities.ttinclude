@@ -1,0 +1,34 @@
+﻿<#+
+    public static class CommandLineArgsUtilities
+    {
+        public static string[] Get()
+        {
+            string path = this.Host.ResolveAssemblyReference(
+                "$(ProjectDir)\Properties\launchSettings.json");
+
+            string json = File.ReadAllText(path);
+            var launchSettings = JsonDocument.Parse(json);
+
+            return launchSettings.RootElement
+                .GetProperty("profiles")
+                .GetProperty("CsvJoin")
+                .GetProperty("commandLineArgs")
+                .GetString()
+                .Split();
+        }
+
+        public static void Parse(
+            string[] args,
+            out string directory,
+            out string[] fileNames)
+        {
+            if (args.Length < 3)
+            {
+                throw new ArgumentException(nameof(args));
+            }
+
+            string directory = args.First();
+            string[] fileNames = args.Skip(1).Take(2).ToArray();
+        }
+    }
+#>

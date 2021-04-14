@@ -1,0 +1,12 @@
+﻿<#+
+    public static class CsvUtilities
+    {
+        public static string[] ReadHeader(string directory, string fileName)
+        {
+            string path = Host.ResolvePath(@$"{directory}\{fileName}");
+
+            var lines = File.ReadLines(path);
+            return CsvReader.ParseFields(lines.First()).ToArray();
+        }
+    }
+#>

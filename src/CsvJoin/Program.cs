@@ -1,7 +1,6 @@
 ﻿using CsvJoin.Services;
 using CsvJoin.Services.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
 
 namespace CsvJoin
 {
