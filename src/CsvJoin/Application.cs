@@ -25,11 +25,16 @@ namespace CsvJoin
             string directory = args.First();
             string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-            using var reader1 = new StreamReader(@$"{directory}\{fileNames[0]}");
-            using var reader2 = new StreamReader(@$"{directory}\{fileNames[1]}");
+            string path1 = Path.Join(directory, fileNames[0]);
+            string path2 = Path.Join(directory, fileNames[1]);
 
-            var csv1s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv1>>(reader1);
-            var csv2s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv2>>(reader2);
+            using var reader1 = new StreamReader(path1);
+            using var reader2 = new StreamReader(path2);
+
+            var csv1s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv1>>(
+                reader1);
+            var csv2s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv2>>(
+                reader2);
 
             var linq = _preparator.PrepareLeftJoinLinq(csv1s, csv2s);
 
