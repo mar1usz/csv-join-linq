@@ -1,2 +1,5 @@
 [*.cs]
 guidelines = 80
+
+[*.{tt,ttinclude}]
+guidelines = 80
