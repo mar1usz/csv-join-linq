@@ -25,10 +25,14 @@ namespace CsvJoin
             string directory = args.First();
             string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-            string path1 = string.Join(Path.DirectorySeparatorChar,
-                directory, fileNames[0]);
-            string path2 = string.Join(Path.DirectorySeparatorChar,
-                directory, fileNames[1]);
+            string path1 = Path.Combine(
+                Environment.CurrentDirectory,
+                directory,
+                fileNames[0]);
+            string path2 = Path.Combine(
+                Environment.CurrentDirectory,
+                directory,
+                fileNames[1]);
 
             using var reader1 = new StreamReader(path1);
             using var reader2 = new StreamReader(path2);
