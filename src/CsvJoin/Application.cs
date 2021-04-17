@@ -34,8 +34,8 @@ namespace CsvJoin
                 directory,
                 fileNames[1]);
 
-            using var reader1 = new StreamReader(path1);
-            using var reader2 = new StreamReader(path2);
+            using var reader1 = File.OpenText(path1);
+            using var reader2 = File.OpenText(path2);
 
             var csv1s = CsvSerializer.DeserializeFromReader<IEnumerable<Csv1>>(
                 reader1);
