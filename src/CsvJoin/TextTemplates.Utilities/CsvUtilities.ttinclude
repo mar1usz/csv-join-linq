@@ -1,12 +1,22 @@
-﻿<#+
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#+
     public static class CsvUtilities
     {
-        public static string[] ReadHeader(string directory, string fileName)
+        public static string[] ReadHeader(
+            ITextTemplatingEngineHost host,
+            string directory,
+            string fileName)
         {
-            string path = Host.ResolvePath(@$"{directory}\{fileName}");
+            string path = Path.Combine(
+                host.ResolveAssemblyReference("$(ProjectDir)"),
+                directory,
+                fileName);
 
-            var lines = File.ReadLines(path);
-            return CsvReader.ParseFields(lines.First()).ToArray();
+            return File.ReadLines(path).First()
+                .Split(',');
         }
     }
 #>
