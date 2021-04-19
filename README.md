@@ -13,6 +13,11 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 - .NET Core 3.1
 - Visual Studio 2019
 
+## Build and run:
+### VS:
+- src\CsvJoin.sln > Build > Transform All T4 Templates
+- F5
+
 ## Credits:
 - Microsoft.Extensions.DependencyInjection by https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection (MIT license)
 - System.Linq by https://www.nuget.org/packages/System.Linq (MS-.NET-Library License)
