@@ -11,7 +11,7 @@
             string fileName)
         {
             string path = Path.Combine(
-                host.ResolveAssemblyReference("$(ProjectDir)"),
+                Path.GetDirectoryName(host.TemplateFile),
                 directory,
                 fileName);
 

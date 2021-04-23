@@ -10,7 +10,9 @@
     CommandLineArgsUtilities.Parse(args, out directory, out fileNames);
 
     string[] tables = new string[]{ "csv1", "csv2" };
-    string[][] columns = GetColumnNamesFromFilePaths(directory, fileNames);
+    string[][] columns = GetColumnNamesFromFilePaths(
+        ".." + Path.DirectorySeparatorChar + directory,
+        fileNames);
 
     string[] commonColumns = columns[0].Intersect(columns[1]).ToArray();
     string[] joinedColumns = columns[0].Union(columns[1]).ToArray();
