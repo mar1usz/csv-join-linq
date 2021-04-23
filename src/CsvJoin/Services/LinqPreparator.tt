@@ -133,8 +133,8 @@ namespace CsvJoin.Services
         string[] fileNames)
     {
         return fileNames
-            .Select(fileName => CsvUtilities.ReadHeader(Host,
-                directory, fileName))
+            .Select(fileName => CsvUtilities.ReadHeader(
+	        Host, directory, fileName))
             .ToArray();
     }
 #>
