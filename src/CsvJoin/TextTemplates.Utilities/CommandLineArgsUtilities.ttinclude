@@ -17,8 +17,7 @@
                 "launchSettings.json");
 
             using var stream = File.OpenRead(path);
-            return JsonDocument.Parse(stream)
-                .RootElement
+            return JsonDocument.Parse(stream).RootElement
                 .GetProperty("profiles")
                 .GetProperty("CsvJoin")
                 .GetProperty("commandLineArgs")
