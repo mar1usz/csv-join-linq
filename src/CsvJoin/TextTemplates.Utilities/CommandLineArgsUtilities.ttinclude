@@ -11,10 +11,13 @@
     {
         public static string[] Get(ITextTemplatingEngineHost host)
         {
+            string directory = "Properties";
+            string fileName = "launchSettings.json";
+
             string path = Path.Combine(
                 host.ResolveAssemblyReference("$(ProjectDir)"),
-                "Properties",
-                "launchSettings.json");
+                directory,
+                fileName);
 
             using var stream = File.OpenRead(path);
             return JsonDocument.Parse(stream)
