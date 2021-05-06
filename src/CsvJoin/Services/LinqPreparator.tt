@@ -125,7 +125,6 @@ namespace CsvJoin.Services
         }
     }
 }
-
 <#+
     private string[][] GetColumnNamesFromFilePaths(
         string directory,
