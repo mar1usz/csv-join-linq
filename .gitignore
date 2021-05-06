@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/src/CsvJoin/Models/Csv1.cs
+/src/CsvJoin/Models/Csv2.cs
+/src/CsvJoin/Services/LinqPreparator.cs
