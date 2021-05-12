@@ -9,15 +9,15 @@
 <#+
     public static class CommandLineArgsUtilities
     {
+        private const string _launchSettingsPojectDirectory = "Properties";
+        private const string _launchSettingsFileName = "launchSettings.json";
+
         public static string[] Get(ITextTemplatingEngineHost host)
         {
-            string projectDirectory = "Properties";
-            string fileName = "launchSettings.json";
-
             string path = Path.Combine(
                 host.ResolveAssemblyReference("$(ProjectDir)"),
-                projectDirectory,
-                fileName);
+                _launchSettingsPojectDirectory,
+                _launchSettingsFileName);
 
             using var stream = File.OpenRead(path);
             return JsonDocument.Parse(stream)
