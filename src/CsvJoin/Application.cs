@@ -1,4 +1,4 @@
-﻿using CsvJoin.Models;
+using CsvJoin.Models;
 using CsvJoin.Services.Abstractions;
 using ServiceStack.Text;
 using System;
@@ -12,8 +12,10 @@ namespace CsvJoin
     {
         private readonly ILinqPreparator _preparator;
 
-        public Application(ILinqPreparator preparator) =>
+        public Application(ILinqPreparator preparator)
+        {
             _preparator = preparator;
+        }
 
         public void Run(string[] args)
         {
