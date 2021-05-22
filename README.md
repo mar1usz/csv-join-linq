@@ -20,6 +20,6 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 
 ## Credits:
 - Microsoft.Extensions.DependencyInjection by https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection (MIT license)
-- System.Linq by https://www.nuget.org/packages/System.Linq (MS-.NET-Library License)
-- T4 Text Templates by Visual Studio
+- System.Linq by https://github.com/dotnet/runtime (MIT License)
+- Microsoft.VisualStudio.TextTemplating by Visual Studio
 - ServiceStack.Text by https://www.nuget.org/packages/ServiceStack.Text ([license](https://github.com/ServiceStack/ServiceStack.Text/blob/master/license.txt))
