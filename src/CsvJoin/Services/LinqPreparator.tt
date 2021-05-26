@@ -22,8 +22,8 @@ namespace CsvJoin.Services
             IEnumerable<Csv1> csv1s,
             IEnumerable<Csv2> csv2s)
         {
-            return from csv1 in csv1s
-                   join csv2 in csv2s
+            return from <#= tables[0].Name #> in csv1s
+                   join <#= tables[1].Name #> in csv2s
                    on new
                    {
 <#
@@ -51,7 +51,7 @@ namespace CsvJoin.Services
 #>
                    }
                    into gj
-                   from csv2 in gj.DefaultIfEmpty()
+                   from <#= tables[1].Name #> in gj.DefaultIfEmpty()
                    select new
                    {
 <#
@@ -73,8 +73,8 @@ namespace CsvJoin.Services
             IEnumerable<Csv1> csv1s,
             IEnumerable<Csv2> csv2s)
         {
-            return from csv1 in csv1s
-                   join csv2 in csv2s
+            return from <#= tables[0].Name #> in csv1s
+                   join <#= tables[1].Name #> in csv2s
                    on new
                    {
 <#
