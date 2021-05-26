@@ -9,7 +9,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
-    Table[] LoadTables(ITextTemplatingEngineHost host)
+    List<Table> LoadTables(ITextTemplatingEngineHost host)
     {
         string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
@@ -30,25 +30,19 @@
         string directory = args.First();
         string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-        return new Table[]
+        var result = new List<Table>{ };
+        for (int i = 0; i < 2; i++)
         {
-            new Table
+            result.Add(new Table
             {
-                Name = "csv1",
+                Name = $"csv{i + 1}",
                 Columns = CsvUtilities
-                    .ReadHeader(Host, directory, fileNames[0])
+                    .ReadHeader(Host, directory, fileNames[i])
                     .Select(x => new Column { Name = x })
                     .ToArray()
-            },
-            new Table
-            {
-                Name = "csv2",
-                Columns = CsvUtilities
-                    .ReadHeader(Host, directory, fileNames[1])
-                    .Select(x => new Column { Name = x })
-                    .ToArray()
-            }
-        };
+            });
+        }
+        return result;
     }
 
     class Table
