@@ -1,0 +1,70 @@
+﻿<#@ include file="$(ProjectDir)TextTemplates.Utilities\CsvUtilities.ttinclude" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Memory" #>
+<#@ assembly name="System.Text.Json" #>
+<#@ assembly name="netstandard" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.Json" #>
+<#+
+    Table[] LoadTables(ITextTemplatingEngineHost host)
+    {
+        string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
+        string launchSettingsPath = Path.Combine(
+            projectDir,
+            "Properties",
+            "launchSettings.json");
+
+        using var launchSettingsStream = File.OpenRead(launchSettingsPath);
+        string[] args = JsonDocument.Parse(launchSettingsStream)
+            .RootElement
+            .GetProperty("profiles")
+            .GetProperty("CsvJoin")
+            .GetProperty("commandLineArgs")
+            .GetString()
+            .Split();
+
+        string csvDirectory = args.First();
+        string[] csvFileNames = args.Skip(1).Take(2).ToArray();
+
+        return new Table[]
+        {
+            new Table
+            {
+                Name = "csv1",
+                Columns = CsvUtilities
+                    .ReadHeader(Host,csvDirectory,csvFileNames[0])
+                    .Select(x => new Column { Name = x })
+                    .ToArray()
+            },
+            new Table
+            {
+                Name = "csv2",
+                Columns = CsvUtilities
+                    .ReadHeader(Host,csvDirectory,csvFileNames[1])
+                    .Select(x => new Column { Name = x })
+                    .ToArray()
+            }
+        };
+    }
+
+    class Table
+    {
+        public string Name { get; set; }
+        public Column[] Columns { get; set; }
+    }
+
+    class Column : IEquatable<Column>
+    {
+        public string Name { get; set; }
+
+        public bool Equals(Column other) =>
+            other != null && Name == other.Name;
+        public override bool Equals(object obj) =>
+            Equals(obj as Column);
+        public override int GetHashCode() =>
+            Name.GetHashCode();
+    }
+#>
