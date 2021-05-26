@@ -61,7 +61,7 @@ namespace CsvJoin.Services
                        <#= string.Format("{0}.{1}",
                                tables[0].Columns.Contains(joinedColumn)
                                    ? tables[0].Name
-                                   : tables[1].Name + '?',
+                                   : $"{tables[1].Name}?",
                                joinedColumn.Name) #>,
 <#
 	}
