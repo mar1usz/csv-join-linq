@@ -27,8 +27,8 @@
             .GetString()
             .Split();
 
-        string csvDirectory = args.First();
-        string[] csvFileNames = args.Skip(1).Take(2).ToArray();
+        string directory = args.First();
+        string[] fileNames = args.Skip(1).Take(2).ToArray();
 
         return new Table[]
         {
@@ -36,7 +36,7 @@
             {
                 Name = "csv1",
                 Columns = CsvUtilities
-                    .ReadHeader(Host, csvDirectory, csvFileNames[0])
+                    .ReadHeader(Host, directory, fileNames[0])
                     .Select(x => new Column { Name = x })
                     .ToArray()
             },
@@ -44,7 +44,7 @@
             {
                 Name = "csv2",
                 Columns = CsvUtilities
-                    .ReadHeader(Host, csvDirectory, csvFileNames[1])
+                    .ReadHeader(Host, directory, fileNames[1])
                     .Select(x => new Column { Name = x })
                     .ToArray()
             }
