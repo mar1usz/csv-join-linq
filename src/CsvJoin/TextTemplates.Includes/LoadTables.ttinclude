@@ -18,7 +18,8 @@
             "launchSettings.json");
 
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
-        string[] args = JsonDocument.Parse(launchSettingsStream)
+        string[] args = JsonDocument
+            .Parse(launchSettingsStream)
             .RootElement
             .GetProperty("profiles")
             .GetProperty("CsvJoin")
