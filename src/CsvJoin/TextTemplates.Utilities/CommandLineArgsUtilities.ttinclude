@@ -9,14 +9,14 @@
 <#+
     public static class CommandLineArgsUtilities
     {
-        private static readonly string _launchSettingsProjectPath =
+        private static readonly string _launchSettingsPath =
             $"Properties{Path.DirectorySeparatorChar}launchSettings.json";
 
         public static string[] Get(ITextTemplatingEngineHost host)
         {
             string path = Path.Combine(
                 host.ResolveAssemblyReference("$(ProjectDir)"),
-                _launchSettingsProjectPath);
+                _launchSettingsPath);
 
             using var stream = File.OpenRead(path);
             return JsonDocument.Parse(stream)
