@@ -36,7 +36,7 @@
             {
                 Name = "csv1",
                 Columns = CsvUtilities
-                    .ReadHeader(Host,csvDirectory,csvFileNames[0])
+                    .ReadHeader(Host, csvDirectory, csvFileNames[0])
                     .Select(x => new Column { Name = x })
                     .ToArray()
             },
@@ -44,7 +44,7 @@
             {
                 Name = "csv2",
                 Columns = CsvUtilities
-                    .ReadHeader(Host,csvDirectory,csvFileNames[1])
+                    .ReadHeader(Host, csvDirectory, csvFileNames[1])
                     .Select(x => new Column { Name = x })
                     .ToArray()
             }
