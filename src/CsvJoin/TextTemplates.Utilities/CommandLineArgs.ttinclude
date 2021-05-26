@@ -1,0 +1,38 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Memory" #>
+<#@ assembly name="System.Text.Json" #>
+<#@ assembly name="netstandard" #>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.Json" #>
+<#+
+    CommandLineArgs LoadCommandLineArgs(ITextTemplatingEngineHost host)
+    {
+        string path = Path.Combine(
+            host.ResolveAssemblyReference("$(ProjectDir)"),
+            "Properties",
+            "launchSettings.json");
+
+        using var stream = File.OpenRead(path);
+        string[] args = JsonDocument.Parse(stream)
+            .RootElement
+            .GetProperty("profiles")
+            .GetProperty("CsvJoin")
+            .GetProperty("commandLineArgs")
+            .GetString()
+            .Split();
+
+        return new CommandLineArgs
+        {
+            Directory = args.First(),
+            FileNames = args.Skip(1).Take(2).ToArray()
+        };
+    }
+
+    class CommandLineArgs
+    {
+        public string Directory { get; set; }
+        public string[] FileNames { get; set; }
+    }
+#>

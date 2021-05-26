@@ -1,17 +1,17 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ include file="$(ProjectDir)TextTemplates.Utilities\CsvUtilities.ttinclude" #>
-<#@ include file="$(ProjectDir)TextTemplates.Utilities\CommandLineArgsUtilities.ttinclude" #>
+<#@ include file="$(ProjectDir)TextTemplates.Utilities\CommandLineArgs.ttinclude" #>
 <#@ output extension=".cs" #>
 <#
-    string directory;
-    string[] fileNames;
-    string[] args = CommandLineArgsUtilities.Get(Host);
-    CommandLineArgsUtilities.Parse(args, out directory, out fileNames);
+    var model = LoadCommandLineArgs(Host);
 
     string[] tables = new string[]{ "csv1", "csv2" };
-    string[][] columns = GetColumnNamesFromFilePaths(
-        ".." + Path.DirectorySeparatorChar + directory,
-        fileNames);
+    string[][] columns = model.FileNames
+            .Select(fileName => CsvUtilities.ReadHeader(
+	            Host,
+                model.Directory,
+                fileName))
+            .ToArray();
 
     string[] commonColumns = columns[0].Intersect(columns[1]).ToArray();
     string[] joinedColumns = columns[0].Union(columns[1]).ToArray();
@@ -125,14 +125,3 @@ namespace CsvJoin.Services
         }
     }
 }
-<#+
-    private string[][] GetColumnNamesFromFilePaths(
-        string directory,
-        string[] fileNames)
-    {
-        return fileNames
-            .Select(fileName => CsvUtilities.ReadHeader(
-	        Host, directory, fileName))
-            .ToArray();
-    }
-#>
