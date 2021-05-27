@@ -45,7 +45,7 @@
         return new Tables(tables);
     }
     
-    class Tables : IEnumerable<Table>
+    class Tables : IReadOnlyList<Table>
     {
         private readonly IList<Table> _tables;
 
@@ -62,6 +62,9 @@
 
         public IEnumerable<Column> JoinColumns =>
             _tables[0].Columns.Intersect(_tables[1].Columns);
+
+        public int Count =>
+            _tables.Count;
 
         public IEnumerator<Table> GetEnumerator() =>
             _tables.GetEnumerator();
