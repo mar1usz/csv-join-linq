@@ -54,14 +54,14 @@
             _tables = tables;
         }
 
+        public Table this[int index] =>
+            _tables[index];
+
         public IEnumerable<Column> AllColumns =>
             _tables[0].Columns.Union(_tables[1].Columns);
 
         public IEnumerable<Column> JoinColumns =>
             _tables[0].Columns.Intersect(_tables[1].Columns);
-
-        public Table this[int index] =>
-            _tables[index];
 
         public IEnumerator<Table> GetEnumerator() =>
             _tables.GetEnumerator();
