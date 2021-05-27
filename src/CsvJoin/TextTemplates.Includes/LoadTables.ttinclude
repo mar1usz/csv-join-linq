@@ -4,12 +4,13 @@
 <#@ assembly name="System.Text.Json" #>
 <#@ assembly name="netstandard" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
+<#@ import namespace="System.Collections" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
-    IList<Table> LoadTables(ITextTemplatingEngineHost host)
+    Tables LoadTables(ITextTemplatingEngineHost host)
     {
         string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
@@ -29,10 +30,10 @@
         string directory = args.First();
         string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-        var result = new List<Table>{ };
+        var tables = new List<Table>{ };
         for (int i = 0; i < 2; i++)
         {
-            result.Add(new Table
+            tables.Add(new Table
             {
                 Name = $"csv{i + 1}",
                 Columns = CsvUtilities
@@ -41,13 +42,41 @@
                     .ToArray()
             });
         }
-        return result;
+        return new Tables(tables);
+    }
+    
+    class Tables : IEnumerable<Table>
+    {
+        private readonly IList<Table> _tables;
+
+        public Tables(IList<Table> tables)
+        {
+            _tables = tables;
+        }
+
+        public IEnumerable<Column> AllColumns =>
+            _tables[0].Columns.Union(_tables[1].Columns);
+
+        public IEnumerable<Column> JoinColumns =>
+            _tables[0].Columns.Intersect(_tables[1].Columns);
+
+        public Table this[int index] =>
+            _tables[index];
+
+        public IEnumerator<Table> GetEnumerator() =>
+            _tables.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() =>
+            _tables.GetEnumerator();
     }
 
     class Table
     {
         public string Name { get; set; }
-        public Column[] Columns { get; set; }
+        public IEnumerable<Column> Columns { get; set; }
+
+        public bool ContainsColumn(Column column) =>
+            Columns.Contains(column);
     }
 
     class Column : IEquatable<Column>
@@ -56,8 +85,10 @@
 
         public bool Equals(Column other) =>
             other != null && Name == other.Name;
+
         public override bool Equals(object obj) =>
             Equals(obj as Column);
+
         public override int GetHashCode() =>
             Name.GetHashCode();
     }
