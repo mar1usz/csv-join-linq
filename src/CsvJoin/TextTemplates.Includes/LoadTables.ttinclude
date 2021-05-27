@@ -9,7 +9,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
-    List<Table> LoadTables(ITextTemplatingEngineHost host)
+    IList<Table> LoadTables(ITextTemplatingEngineHost host)
     {
         string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
