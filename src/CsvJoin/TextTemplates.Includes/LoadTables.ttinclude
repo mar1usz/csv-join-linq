@@ -18,8 +18,7 @@
             "launchSettings.json");
 
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
-        string[] args = JsonDocument
-            .Parse(launchSettingsStream)
+        string[] args = JsonDocument.Parse(launchSettingsStream)
             .RootElement
             .GetProperty("profiles")
             .GetProperty("CsvJoin")
@@ -37,7 +36,10 @@
             {
                 Name = $"csv{i + 1}",
                 Columns = CsvUtilities
-                    .ReadHeader(Host, directory, fileNames[i])
+                    .ReadHeader(
+                        Host,
+                        directory,
+                        fileNames[i])
                     .Select(x => new Column { Name = x })
                     .ToArray()
             });
