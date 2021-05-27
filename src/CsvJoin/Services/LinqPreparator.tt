@@ -3,7 +3,6 @@
 <#@ output extension=".cs" #>
 <#
     var tables = LoadTables(Host);
-   
     var commonColumns = tables[0].Columns.Intersect(tables[1].Columns)
         .ToArray();
     var joinedColumns = tables[0].Columns.Union(tables[1].Columns).ToArray();
