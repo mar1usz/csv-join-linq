@@ -42,14 +42,14 @@
                     .ToArray()
             });
         }
-        return new Tables(tables);
+        return new Tables(tables.AsReadOnly());
     }
     
     class Tables : IReadOnlyList<Table>
     {
-        private readonly IList<Table> _tables;
+        private readonly IReadOnlyList<Table> _tables;
 
-        public Tables(IList<Table> tables)
+        public Tables(IReadOnlyList<Table> tables)
         {
             _tables = tables;
         }
