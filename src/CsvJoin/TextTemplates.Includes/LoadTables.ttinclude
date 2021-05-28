@@ -10,7 +10,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
-    Tables LoadTables(ITextTemplatingEngineHost host)
+    IEnumerable<Table> LoadTables(ITextTemplatingEngineHost host)
     {
         string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
@@ -42,35 +42,7 @@
                     .ToArray()
             });
         }
-        return new Tables(tables.AsReadOnly());
-    }
-    
-    class Tables : IReadOnlyList<Table>
-    {
-        private readonly IReadOnlyList<Table> _tables;
-
-        public Tables(IReadOnlyList<Table> tables)
-        {
-            _tables = tables;
-        }
-
-        public Table this[int index] =>
-            _tables[index];
-
-        public IEnumerable<Column> AllColumns =>
-            _tables[0].Columns.Union(_tables[1].Columns);
-
-        public IEnumerable<Column> JoinColumns =>
-            _tables[0].Columns.Intersect(_tables[1].Columns);
-
-        public int Count =>
-            _tables.Count;
-
-        public IEnumerator<Table> GetEnumerator() =>
-            _tables.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            _tables.GetEnumerator();
+        return tables;
     }
 
     class Table
