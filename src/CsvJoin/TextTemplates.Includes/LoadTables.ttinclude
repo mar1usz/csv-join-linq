@@ -46,7 +46,6 @@
                 Columns = CsvUtilities
                     .ReadHeader(Host, directory, fileNames[i])
                     .Select(field => new Column { Name = field })
-                    .ToArray()
             });
         }
         return tables;
