@@ -28,6 +28,11 @@
             .GetString()
             .Split();
 
+        if (args.Length < 3)
+        {
+            throw new ArgumentException(nameof(args));
+        }
+
         string directory = args.First();
         string[] fileNames = args.Skip(1).Take(2).ToArray();
 
