@@ -19,6 +19,7 @@
             "launchSettings.json");
 
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
+
         string[] args = JsonDocument.Parse(launchSettingsStream)
             .RootElement
             .GetProperty("profiles")
@@ -60,8 +61,10 @@
 
         public bool Equals(Column other) =>
             other != null && Name == other.Name;
+
         public override bool Equals(object obj) =>
             Equals(obj as Column);
+
         public override int GetHashCode() =>
             Name.GetHashCode();
     }
