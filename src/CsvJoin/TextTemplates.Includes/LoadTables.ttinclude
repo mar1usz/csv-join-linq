@@ -44,7 +44,7 @@
                 Name = $"csv{i + 1}",
                 Columns = CsvUtilities
                     .ReadHeader(Host, directory, fileNames[i])
-                    .Select(x => new Column { Name = x })
+                    .Select(field => new Column { Name = field })
                     .ToArray()
             });
         }
