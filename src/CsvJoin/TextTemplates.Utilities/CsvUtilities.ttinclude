@@ -16,7 +16,8 @@
                 directory,
                 fileName);
 
-            return File.ReadLines(path).First().Split(',');
+            return File.ReadLines(path).First()
+                .Split(',');
         }
     }
 #>
