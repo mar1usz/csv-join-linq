@@ -27,29 +27,29 @@ namespace CsvJoin
             string directory = args.First();
             string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-            using var reader1 = GetReader(directory, fileNames[0]);
-            using var reader2 = GetReader(directory, fileNames[1]);
+            using var stream1 = GetStream(directory, fileNames[0]);
+            using var stream2 = GetStream(directory, fileNames[1]);
 
             var csv1s = CsvSerializer
-                .DeserializeFromReader<IEnumerable<Csv1>>(reader1);
+                .DeserializeFromStream<IEnumerable<Csv1>>(stream1);
             var csv2s = CsvSerializer
-                .DeserializeFromReader<IEnumerable<Csv2>>(reader2);
+                .DeserializeFromStream<IEnumerable<Csv2>>(stream2);
 
             var linq = _preparator.PrepareLeftJoinLinq(csv1s, csv2s);
 
-            var output = Console.Out;
+            var output = Console.OpenStandardOutput();
 
-            CsvSerializer.SerializeToWriter(linq, output);
+            CsvSerializer.SerializeToStream(linq, output);
         }
 
-        private StreamReader GetReader(string directory, string fileName)
+        private FileStream GetStream(string directory, string fileName)
         {
             string path = Path.Combine(
                 Environment.CurrentDirectory,
                 directory,
                 fileName);
 
-            return File.OpenText(path);
+            return File.OpenRead(path);
         }
     }
 }
