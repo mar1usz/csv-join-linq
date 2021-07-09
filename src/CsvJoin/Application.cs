@@ -27,17 +27,8 @@ namespace CsvJoin
             string directory = args.First();
             string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-            string path1 = Path.Combine(
-                Environment.CurrentDirectory,
-                directory,
-                fileNames[0]);
-            string path2 = Path.Combine(
-                Environment.CurrentDirectory,
-                directory,
-                fileNames[1]);
-
-            using var stream1 = File.OpenRead(path1);
-            using var stream2 = File.OpenRead(path2);
+            using var stream1 = GetStream(directory, fileNames[0]);
+            using var stream2 = GetStream(directory, fileNames[1]);
 
             var csv1s = CsvSerializer
                 .DeserializeFromStream<IEnumerable<Csv1>>(stream1);
@@ -49,6 +40,16 @@ namespace CsvJoin
             var output = Console.OpenStandardOutput();
 
             CsvSerializer.SerializeToStream(linq, output);
+        }
+
+        private FileStream GetStream(string directory, string fileName)
+        {
+            string path = Path.Combine(
+                Environment.CurrentDirectory,
+                directory,
+                fileName);
+
+            return File.OpenRead(path);
         }
     }
 }
