@@ -21,8 +21,7 @@
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
         using var launchSettings = JsonDocument.Parse(launchSettingsStream);
 
-        string[] args = launchSettings
-            .RootElement
+        string[] args = launchSettings.RootElement
             .GetProperty("profiles")
             .GetProperty("CsvJoin")
             .GetProperty("commandLineArgs")
