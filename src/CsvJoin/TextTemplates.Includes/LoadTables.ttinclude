@@ -10,8 +10,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
-    private const string launchSettingsDirectory = "Properties";
-    private const string launchSettingsFileName = "launchSettings.json";
+    private const string LaunchSettingsDirectory = "Properties";
+    private const string LaunchSettingsFileName = "launchSettings.json";
 
     IEnumerable<Table> LoadTables(ITextTemplatingEngineHost host)
     {
