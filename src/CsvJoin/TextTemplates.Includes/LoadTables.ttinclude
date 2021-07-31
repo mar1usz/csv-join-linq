@@ -39,7 +39,7 @@
         string directory = args.First();
         string[] fileNames = args.Skip(1).Take(2).ToArray();
 
-        var tables = new List<Table>{ };
+        var tables = new List<Table> { };
         for (int i = 0; i < 2; i++)
         {
             tables.Add(new Table
