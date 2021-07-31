@@ -18,8 +18,8 @@
         string projectDirectory = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
             projectDirectory,
-            launchSettingsDirectory,
-            launchSettingsFileName);
+            LaunchSettingsDirectory,
+            LaunchSettingsFileName);
 
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
         using var launchSettings = JsonDocument.Parse(launchSettingsStream);
