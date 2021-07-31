@@ -10,13 +10,16 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.Json" #>
 <#+
+    private const string launchSettingsDirectory = "Properties";
+    private const string launchSettingsFileName = "launchSettings.json";
+
     IEnumerable<Table> LoadTables(ITextTemplatingEngineHost host)
     {
-        string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
+        string projectDirectory = host.ResolveAssemblyReference("$(ProjectDir)");
         string launchSettingsPath = Path.Combine(
-            projectDir,
-            "Properties",
-            "launchSettings.json");
+            projectDirectory,
+            launchSettingsDirectory,
+            launchSettingsFileName);
 
         using var launchSettingsStream = File.OpenRead(launchSettingsPath);
         using var launchSettings = JsonDocument.Parse(launchSettingsStream);
