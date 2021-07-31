@@ -10,9 +10,9 @@
             string directory,
             string fileName)
         {
-            string projectDir = host.ResolveAssemblyReference("$(ProjectDir)");
+            string projectDirectory = host.ResolveAssemblyReference("$(ProjectDir)");
             string path = Path.Combine(
-                projectDir,
+                projectDirectory,
                 directory,
                 fileName);
 
