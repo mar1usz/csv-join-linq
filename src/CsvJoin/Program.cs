@@ -19,8 +19,18 @@ namespace CsvJoin
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ILinqPreparator, LinqPreparator>();
+            AddServices(services);
 
+            AddApplication(services);
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddTransient<ILinqPreparator, LinqPreparator>();
+        }
+
+        private static void AddApplication(IServiceCollection services)
+        {
             services.AddTransient<Application>();
         }
     }
