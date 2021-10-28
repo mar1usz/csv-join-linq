@@ -1,4 +1,5 @@
-﻿<#@ assembly name="System.Core" #>
+﻿<#@ include file="$(ProjectDir)TextTemplates\MsBuildMacros.ttinclude" #>
+<#@ assembly name="System.Core" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
@@ -10,7 +11,9 @@
             string directory,
             string fileName)
         {
-            string projectDirectory = host.ResolveAssemblyReference("$(ProjectDir)");
+            string projectDirectory = host
+                .ResolveAssemblyReference(MsBuildMacros.ProjectDirectory);
+
             string path = Path.Combine(
                 projectDirectory,
                 directory,

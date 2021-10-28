@@ -1,0 +1,7 @@
+﻿<#@ assembly name="System.Core" #>
+<#+
+    static class MsBuildMacros
+    {
+        public const string ProjectDirectory = "$(ProjectDir)";
+    }
+#>

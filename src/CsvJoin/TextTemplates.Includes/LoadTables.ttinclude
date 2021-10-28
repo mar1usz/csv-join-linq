@@ -15,7 +15,9 @@
 
     IEnumerable<Table> LoadTables(ITextTemplatingEngineHost host)
     {
-        string projectDirectory = host.ResolveAssemblyReference("$(ProjectDir)");
+        string projectDirectory = host
+            .ResolveAssemblyReference(MsBuildMacros.ProjectDirectory);
+
         string launchSettingsPath = Path.Combine(
             projectDirectory,
             LaunchSettingsDirectory,
