@@ -1,5 +1,4 @@
 ﻿<#@ include file="$(ProjectDir)TextTemplates.Utilities\CsvUtilities.ttinclude" #>
-<#@ assembly name="System.Core" #>
 <#@ assembly name="System.Memory" #>
 <#@ assembly name="System.Text.Json" #>
 <#@ assembly name="netstandard" #>
