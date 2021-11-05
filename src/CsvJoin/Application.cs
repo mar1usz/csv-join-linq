@@ -10,6 +10,8 @@ namespace CsvJoin
 {
     public class Application
     {
+        private static readonly Stream Output = Console.OpenStandardOutput();
+
         private readonly ILinqPreparator _preparator;
 
         public Application(ILinqPreparator preparator)
@@ -37,9 +39,7 @@ namespace CsvJoin
 
             var linq = _preparator.PrepareLeftJoinLinq(csv1s, csv2s);
 
-            var output = Console.OpenStandardOutput();
-
-            CsvSerializer.SerializeToStream(linq, output);
+            CsvSerializer.SerializeToStream(linq, Output);
         }
 
         private FileStream GetStream(string directory, string fileName)
