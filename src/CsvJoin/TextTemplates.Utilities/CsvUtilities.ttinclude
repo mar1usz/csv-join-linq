@@ -1,4 +1,4 @@
-﻿<#@ include file="$(ProjectDir)TextTemplates.Includes\MsBuildMacros.ttinclude" #>
+﻿<#@ include file="$(ProjectDir)TextTemplates.Constants\MsBuildMacros.ttinclude" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
