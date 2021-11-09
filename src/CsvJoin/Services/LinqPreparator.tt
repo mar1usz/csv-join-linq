@@ -5,6 +5,7 @@
 <#@ output extension=".cs" #>
 <#
     var tables = LoadTables(Host);
+
     var allColumns = GetAllColumns(tables);
     var joinColumns = GetJoinColumns(tables);
 #>
