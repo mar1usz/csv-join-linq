@@ -54,6 +54,12 @@
         return tables;
     }
 
+    IEnumerable<Column> GetAllColumns(IEnumerable<Table> tables) =>
+        tables.ElementAt(0).Columns.Union(tables.ElementAt(1).Columns);
+
+    IEnumerable<Column> GetJoinColumns(IEnumerable<Table> tables) =>
+        tables.ElementAt(0).Columns.Intersect(tables.ElementAt(1).Columns);
+
     class Table
     {
         public string Name { get; set; }
