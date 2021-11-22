@@ -10,8 +10,8 @@
             string directory,
             string fileName)
         {
-            string projectDirectory = host
-                .ResolveAssemblyReference(MsBuildMacros.ProjectDirectory);
+            string projectDirectory = host.ResolveAssemblyReference(
+                MsBuildMacros.ProjectDirectory);
 
             string path = Path.Combine(
                 projectDirectory,
