@@ -78,7 +78,8 @@
             return other != null &&
                    Name == other.Name &&
                    EqualityComparer<IEnumerable<Column>>.Default.Equals(
-                       Columns, other.Columns);
+                       Columns,
+                       other.Columns);
         }
 
         public override int GetHashCode() =>
