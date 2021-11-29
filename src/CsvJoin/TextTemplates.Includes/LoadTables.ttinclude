@@ -62,13 +62,33 @@
     IEnumerable<Column> GetJoinColumns(IEnumerable<Table> tables) =>
         tables.ElementAt(0).Columns.Intersect(tables.ElementAt(1).Columns);
 
-    class Table
+    class Table : IEquatable<Table>
     {
         public string Name { get; set; }
         public IEnumerable<Column> Columns { get; set; }
 
         public bool ContainsColumn(Column column) =>
             Columns.Contains(column);
+
+        public override bool Equals(object obj) =>
+            Equals(obj as Table);
+
+        public bool Equals(Table other)
+        {
+            return other != null &&
+                   Name == other.Name &&
+                   EqualityComparer<IEnumerable<Column>>.Default.Equals(
+                       Columns, other.Columns);
+        }
+
+        public override int GetHashCode() =>
+            HashCode.Combine(Name, Columns);
+
+        public static bool operator ==(Table left, Table right) =>
+            EqualityComparer<Table>.Default.Equals(left, right);
+
+        public static bool operator !=(Table left, Table right) =>
+            !(left == right);
     }
 
     class Column : IEquatable<Column>
