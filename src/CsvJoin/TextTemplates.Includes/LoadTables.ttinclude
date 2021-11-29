@@ -75,13 +75,22 @@
     {
         public string Name { get; set; }
 
-        public bool Equals(Column other) =>
-            other != null && Name == other.Name;
-
         public override bool Equals(object obj) =>
             Equals(obj as Column);
 
+        public bool Equals(Column other)
+        {
+            return other != null &&
+                   Name == other.Name;
+        }
+
         public override int GetHashCode() =>
-            Name.GetHashCode();
+            HashCode.Combine(Name);
+
+        public static bool operator ==(Column left, Column right) =>
+            EqualityComparer<Column>.Default.Equals(left, right);
+
+        public static bool operator !=(Column left, Column right) =>
+            !(left == right);
     }
 #>
