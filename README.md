@@ -18,7 +18,7 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 - src\CsvJoin.sln > Build > Transform All T4 Templates
 - F5
 
-## Credits:
+## Acknowledgements:
 - Microsoft.Extensions.DependencyInjection by https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection (MIT license)
 - System.Linq by .NET Core (MIT License)
 - ServiceStack.Text by https://www.nuget.org/packages/ServiceStack.Text ([license](https://github.com/ServiceStack/ServiceStack.Text/blob/master/license.txt))
