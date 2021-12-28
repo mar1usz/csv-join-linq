@@ -75,11 +75,11 @@
 
         public bool Equals(Table other)
         {
-            return other != null &&
-                   Name == other.Name &&
-                   EqualityComparer<IEnumerable<Column>>.Default.Equals(
-                       Columns,
-                       other.Columns);
+            return other != null
+                   && Name == other.Name
+                   && EqualityComparer<IEnumerable<Column>>.Default.Equals(
+                          Columns,
+                          other.Columns);
         }
 
         public override int GetHashCode() =>
@@ -101,8 +101,8 @@
 
         public bool Equals(Column other)
         {
-            return other != null &&
-                   Name == other.Name;
+            return other != null
+                   && Name == other.Name;
         }
 
         public override int GetHashCode() =>
