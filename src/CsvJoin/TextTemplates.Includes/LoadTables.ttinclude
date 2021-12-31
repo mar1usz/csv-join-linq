@@ -46,12 +46,11 @@
             tables.Add(new Table
             {
                 Name = $"csv{i + 1}",
-                Columns = CsvUtilities
-                    .ReadHeader(Host, directory, fileNames[i])
-                    .Select(f => new Column
-                    {
-                        Name = f
-                    })
+                Columns = CsvUtilities.ReadHeader(Host, directory, fileNames[i])
+                .Select(f => new Column
+                {
+                    Name = f
+                })
             });
         }
         return tables;
