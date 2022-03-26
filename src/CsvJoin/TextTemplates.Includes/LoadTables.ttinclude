@@ -16,7 +16,6 @@
     {
         string projectDirectory = host.ResolveAssemblyReference(
             MsBuildMacros.ProjectDirectory);
-
         string launchSettingsPath = Path.Combine(
             projectDirectory,
             LaunchSettingsDirectory,
@@ -60,7 +59,6 @@
     {
         public string Name { get; set; }
         public IEnumerable<Column> Columns { get; set; }
-
         public bool ContainsColumn(Column column) =>
             Columns.Contains(column);
     }

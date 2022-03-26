@@ -38,7 +38,6 @@ namespace CsvJoin
                 .DeserializeFromStream<IEnumerable<Csv2>>(stream2);
 
             var linq = _preparator.PrepareLeftJoinLinq(csv1s, csv2s);
-
             CsvSerializer.SerializeToStream(linq, Output);
         }
 

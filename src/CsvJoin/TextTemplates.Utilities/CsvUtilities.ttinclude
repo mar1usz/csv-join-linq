@@ -12,14 +12,12 @@
         {
             string projectDirectory = host.ResolveAssemblyReference(
                 MsBuildMacros.ProjectDirectory);
-
             string path = Path.Combine(
                 projectDirectory,
                 directory,
                 fileName);
 
-            return File.ReadLines(path).First()
-                .Split(',');
+            return File.ReadLines(path).First().Split(',');
         }
     }
 #>

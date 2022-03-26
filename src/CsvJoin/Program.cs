@@ -9,11 +9,8 @@ namespace CsvJoin
         public static void Main(string[] args)
         {
             var services = new ServiceCollection();
-
             ConfigureServices(services);
-
             var serviceProvider = services.BuildServiceProvider();
-
             serviceProvider.GetRequiredService<Application>().Run(args);
         }
 
