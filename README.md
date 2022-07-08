@@ -9,6 +9,9 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 - Save results to CSV
 - Generate C# models and LINQ by using T4 Text Templates
 
+## To implement:
+- Protect against code injection
+
 ## Prerequisites:
 - .NET Core 3.1
 - Visual Studio 2019
