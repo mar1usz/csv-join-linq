@@ -43,11 +43,7 @@ namespace CsvJoin
 
         private FileStream GetStream(string directory, string fileName)
         {
-            string path = Path.Combine(
-                Environment.CurrentDirectory,
-                directory,
-                fileName);
-
+            string path = Path.Join(directory, fileName);
             return File.OpenRead(path);
         }
     }
