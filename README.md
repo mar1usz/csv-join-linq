@@ -19,6 +19,7 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 ## Build and run:
 ### VS:
 - src\CsvJoin.sln > Build > Transform All T4 Templates
+- Verify that the generated files (src\CsvJoin\Models\Csv1.cs, src\CsvJoin\Models\Csv2.cs and src\CsvJoin\Services\LinqPreparator.cs) do not contain code injection
 - F5
 
 ## Acknowledgements:
