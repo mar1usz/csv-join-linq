@@ -11,7 +11,7 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 
 ## Prerequisites:
 - .NET Core 3.1
-- Visual Studio 2019
+- Visual Studio 2022
 
 ## Build and run:
 ### VS:
