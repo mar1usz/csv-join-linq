@@ -6,11 +6,8 @@ CsvJoin.exe Data sales.csv new_sales.csv > joined_sales.csv
 
 ## Features:
 - Execute LINQ against CSV files
-- Save results to CSV
 - Generate C# models and LINQ by using T4 Text Templates
-
-## To implement:
-- Protect against code injection
+- Save results to CSV
 
 ## Prerequisites:
 - .NET Core 3.1
