@@ -48,9 +48,9 @@
             };            
             table.Columns = CsvUtilities
                 .ReadHeader(Host, directory, fileNames[i])
-                .Select(f => new Column
+                .Select(field => new Column
                 {
-                    Name = f
+                    Name = field
                 });
             tables.Add(table);
         }
