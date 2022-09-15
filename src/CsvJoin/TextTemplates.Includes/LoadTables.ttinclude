@@ -42,15 +42,17 @@
         var tables = new List<Table> { };
         for (int i = 0; i < 2; i++)
         {
-            tables.Add(new Table
+            var table = new Table
             {
-                Name = $"csv{i + 1}",
-                Columns = CsvUtilities.ReadHeader(Host, directory, fileNames[i])
+                Name = $"csv{i + 1}"
+            };            
+            table.Columns = CsvUtilities
+                .ReadHeader(Host, directory, fileNames[i])
                 .Select(f => new Column
                 {
                     Name = f
-                })
-            });
+                });
+            tables.Add(table);
         }
         return tables;
     }
